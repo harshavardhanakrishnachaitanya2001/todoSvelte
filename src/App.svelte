@@ -1,39 +1,46 @@
 <script>
-	let thing='';
-	let listOfThings=[];
-	function handleChange(e){
-		e.preventDefault();
-		thing=e.target.value;
+    let newItem = '';	
+    let todoList = [];
+	function addToList() {
+		todoList = [...todoList, {text: newItem, status: false}];
+		newItem = '';
 	}
-	function handleClick(e){
-		e.preventDefault();
-		listOfThings.push(thing);
-		listOfThings=listOfThings;
-		thing='';
-	}
-	
+	function emptyList() {
+		todoList=[];
+		todoList = todoList;
+    }
 </script>
-<div>
-	<h1>Todo application</h1>
-	<h2>Made by: G. Harshavardhan</h2>
-	<b>task:</b> <input type='text' placeholder='task name' on:change={handleChange} value={thing} required/>
-	<button on:click={handleClick}>Add task</button>
-	<p class='displayListOfThings'>{listOfThings}</p>
+
+<div class='main'>
+<h1>Todo List with svelte</h1>
+<h2>Developed by: 'Harshavardhan'</h2>
+<input bind:value={newItem} type="text" placeholder="new todo item..">
+<button on:click={addToList}>Add task</button><br/>
+{#each todoList as item, index}
+	<input class='checking' bind:checked={item.status} type="checkbox">
+	<span class:checked={item.status}>{item.text}</span>
+	<br/>
+{/each}
+{
+todoList===[]?'':newItem
+}<br />
+<button on:click={() => emptyList()}>Empty list</button>
 </div>
 
-<style>
-	div {
-		text-align: center;
+<style> 
+	.main{
+		text-align:center;
 	}
-	button{
+	.checking{
 		cursor:pointer
 	}
+	.checked {
+        text-decoration: line-through;
+    }
 	input{
-		text-align: center;
+		text-align:center;
 	}
-
-	h1 {
-		font-size: 4em;
-		font-weight: bolder;
+	button{
+		cursor:pointer;
 	}
-</style>
+</style> 
