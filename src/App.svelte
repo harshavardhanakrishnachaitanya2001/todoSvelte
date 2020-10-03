@@ -14,7 +14,7 @@
 <div class='main'>
 	<h1>Todo List with svelte</h1>
 	<h2>Developed by: 'Harshavardhan'</h2>
-	Enter task: <input bind:value={newItem} type="text">
+	<b>Enter task:</b> <input bind:value={newItem} type="text">
 	<button on:click={addToList} type='submit'>Add task</button><br/>
 	{#each todoList as item, index}
 		<input class='checking' bind:checked={item.status} type="checkbox">
